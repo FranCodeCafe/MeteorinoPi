@@ -1,2 +1,2 @@
-# meteorino
-Weather station based on Raspberry Pi and Arduino
+# Meteorino
+A weather station based on Raspberry Pi and Arduino
