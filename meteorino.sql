@@ -1,15 +1,13 @@
--- phpMyAdmin SQL Dump
--- version 4.7.4
+﻿-- phpMyAdmin SQL Dump
+-- version 4.6.6deb4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 24-08-2018 a las 02:15:32
--- Versión del servidor: 10.1.29-MariaDB
--- Versión de PHP: 7.2.0
+-- Servidor: localhost:3306
+-- Tiempo de generación: 23-10-2018 a las 18:40:08
+-- Versión del servidor: 10.1.23-MariaDB-9+deb9u1
+-- Versión de PHP: 7.0.30-0+deb9u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -30,13 +28,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `gps` (
   `id` int(11) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `longitud` float DEFAULT NULL,
-  `latitud` float DEFAULT NULL,
-  `altitud` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+  `fecha` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `longitud` float(10,6) DEFAULT NULL,
+  `latitud` float(10,6) DEFAULT NULL,
+  `altitud` float(7,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;------------------
 
 --
 -- Estructura de tabla para la tabla `login`
@@ -48,16 +44,7 @@ CREATE TABLE `login` (
   `usuario` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
   `clave` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `login`
---
-
-INSERT INTO `login` (`id`, `nivel`, `usuario`, `email`, `clave`) VALUES
-(1, 1, 'superadmin', 'franciscasalinascastillo@gmail.com', 'superadmin');
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;--------------------------------
 
 --
 -- Estructura de tabla para la tabla `weather`
@@ -65,19 +52,21 @@ INSERT INTO `login` (`id`, `nivel`, `usuario`, `email`, `clave`) VALUES
 
 CREATE TABLE `weather` (
   `id` int(11) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `fecha2` datetime DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
   `hora` time DEFAULT NULL,
-  `humedad` float DEFAULT NULL,
-  `temperatura` float DEFAULT NULL,
-  `presion` float DEFAULT NULL,
+  `humedad` decimal(6,2) DEFAULT NULL,
+  `temperatura` decimal(6,2) DEFAULT NULL,
+  `presion` decimal(8,2) DEFAULT NULL,
   `vientodir` varchar(7) DEFAULT NULL,
-  `vientovel` float DEFAULT NULL,
-  `lluvia` float DEFAULT NULL,
-  `luz` varchar(8) DEFAULT NULL,
-  `co2` int(7) DEFAULT NULL,
-  `uv` float DEFAULT NULL,
-  `polvo` float DEFAULT NULL,
-  `temperatura2` float DEFAULT NULL
+  `vientovel` decimal(6,2) DEFAULT NULL,
+  `lluvia` decimal(6,2) DEFAULT NULL,
+  `bruto_lluvia` decimal(6,2) DEFAULT NULL,
+  `luz` decimal(4,2) DEFAULT NULL,
+  `co2` varchar(6) DEFAULT NULL,
+  `uv` decimal(5,2) DEFAULT NULL,
+  `polvo` decimal(6,2) DEFAULT NULL,
+  `temperatura2` decimal(6,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -110,21 +99,17 @@ ALTER TABLE `weather`
 -- AUTO_INCREMENT de la tabla `gps`
 --
 ALTER TABLE `gps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1061;
 --
 -- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT de la tabla `weather`
 --
 ALTER TABLE `weather`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19356;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
