@@ -337,32 +337,6 @@
 
 
             
-		            // Presentational
-		            point.graphicOriginal
-		                .attr(series.pointAttribs(point, state))
-		                .shadow(seriesOpts.shadow, null, cutOff);
-		            if (partShapeArgs) {
-		                // Ensure pfOptions is an object
-		                if (!isObject(pfOptions)) {
-		                    pfOptions = {};
-		                }
-		                if (isObject(seriesOpts.partialFill)) {
-		                    pfOptions = merge(pfOptions, seriesOpts.partialFill);
-		                }
-
-		                fill = (
-		                    pfOptions.fill ||
-		                    color(point.color || series.color).brighten(-0.3).get()
-		                );
-
-		                point.graphicOverlay
-		                    .attr(series.pointAttribs(point, state))
-		                    .attr({
-		                        'fill': fill
-		                    })
-		                    .shadow(seriesOpts.shadow, null, cutOff);
-		            }
-            
 
 		        } else if (graphic) {
 		            point.graphic = graphic.destroy(); // #1269
@@ -423,15 +397,6 @@
 		            this.y = 0;
 		        }
 
-        
-		        if (series.options.colorByPoint) {
-		            colors = series.options.colors || series.chart.options.colors;
-		            colorCount = colors.length;
-
-		            if (!this.options.color && colors[this.y % colorCount]) {
-		                this.color = colors[this.y % colorCount];
-		            }
-		        }
         
 		        this.colorIndex = pick(this.options.colorIndex, this.y % colorCount);
 
