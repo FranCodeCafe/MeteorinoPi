@@ -58,7 +58,7 @@ while True:
         lcd.set_cursor(0,2)
         lcd.message("V:"+pieces1[4]+" km/h")
         lcd.set_cursor(0,3)
-        lcd.message("UV:"+pieces2[1]+" W/m2 ")
+        lcd.message("UV:"+pieces2[1]+" mW/cm2 ")
             
     finally:
         pass
@@ -72,49 +72,59 @@ while True:
     if pieces2[3] == "-127.00":
         pieces2[3] = "0.00" 
  
-    if pieces1[3] >= "570" and pieces1[3] <= "568":
+    if pieces1[3] >= "565" and pieces1[3] <= "574":
         pieces1[3] = "N"
-    elif pieces1[3] >= "807" and pieces1[3] <= "815":
+    elif pieces1[3] >= "790" and pieces1[3] <= "817":
             pieces1[3] = "NE"
-    elif pieces1[3] >= "976" and pieces1[3] <= "989":
+    elif pieces1[3] >= "970" and pieces1[3] <= "1003":
             pieces1[3] = "E"
-    elif pieces1[3] >= "949" and pieces1[3] <= "961":
+    elif pieces1[3] >= "925" and pieces1[3] <= "969":
             pieces1[3] = "SE"
-    elif pieces1[3] >= "896" and pieces1[3] <= "909":
+    elif pieces1[3] >= "888" and pieces1[3] <= "924":
             pieces1[3] = "S"
-    elif pieces1[3] >= "696" and pieces1[3] <= "703":
+    elif pieces1[3] >= "696" and pieces1[3] <= "714":
             pieces1[3] = "SO"
-    elif pieces1[3] >= "396" and pieces1[3] <= "399":
+    elif pieces1[3] >= "371" and pieces1[3] <= "402":
             pieces1[3] = "O"   
     elif pieces1[3] >= "428" and pieces1[3] <= "487":
             pieces1[3] = "NO"
     else:
             pieces1[3] = pieces1[3]
+            
+    lluvia_hoy = "0.00"   
 
-    try:
-        with conexion.cursor() as cursor:
-            cursor.execute("SELECT bruto_lluvia FROM weather WHERE fecha < %s AND hora >= '23:55:00' ORDER BY id DESC LIMIT 1",(fecha,))
-            conexion.commit()
-            output = []
-            for row in cursor:
-                output.append(float(row[0]))
-            
-            bruto_ayer = float(row[0])
-            print(bruto_ayer)
-            bruto_ahora = float(pieces1[5])
-            print(bruto_ahora)
-            lluvia_hoy = bruto_ahora - bruto_ayer
-            #lluvia_hoy = float(diferencia)
-            print(lluvia_hoy)
-            
-    finally:
-        pass
+##    try:
+##        with conexion.cursor() as cursor:
+##            cursor.execute("SELECT bruto_lluvia FROM weather WHERE fecha < %s AND hora >= '23:55:00' ORDER BY id DESC LIMIT 1",(fecha,))
+##            conexion.commit()
+##            output = []
+##            for row in cursor:
+##                output.append(float(row[0]))
+##            
+##            bruto_ayer = float(row[0])
+##            #print(bruto_ayer)
+##            bruto_ahora = float(pieces1[5])
+##            print(bruto_ahora)
+##            print(pieces1[4])
+##            print(pieces1[3])
+##            lluvia_hoy = bruto_ahora - bruto_ayer
+##            #lluvia_hoy = float(diferencia)
+##            #print(lluvia_hoy)
+##            
+##            if lluvia_hoy < 0:
+##                lluvia_hoy = "0.00"
+##            else:
+##                lluvia_hoy = lluvia_hoy
+##            
+##    finally:
+##        pass
 
     try:
         with conexion.cursor() as cursor:
             sqlQuery1 = "INSERT INTO weather(fecha2,fecha,hora,humedad,temperatura,presion,vientodir,vientovel,lluvia,bruto_lluvia,luz,co2,uv,polvo,temperatura2) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             cursor.execute(sqlQuery1,(fecha2,fecha,hora,pieces1[0],pieces1[1],pieces1[2],pieces1[3],pieces1[4],lluvia_hoy,pieces1[5],pieces1[6],pieces2[0],pieces2[1],pieces2[2],pieces2[3]))
             conexion.commit()
+
     finally:
         print("Subiendo datos...")
         conexion.close()
