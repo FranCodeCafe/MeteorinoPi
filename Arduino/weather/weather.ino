@@ -64,7 +64,7 @@ volatile float dailyrainin = 0; // [rain inches so far today in local time]
 //float baromin = 30.03;// [barom in] - It's hard to calculate baromin locally, do this in the agent
 float pressure = 0;
 //float dewptf; // [dewpoint F] - It's hard to calculate dewpoint locally, do this in the agent
-
+float temph = 0;
 float batt_lvl = 11.8; //[analog value from 0 to 1023]
 float light_lvl = 455; //[analog value from 0 to 1023]
 
@@ -237,12 +237,13 @@ void calcWeather()
 
     //Calc humidity
     humidity = myHumidity.readHumidity();
+    temph = myHumidity.readTemperature();
 
     //Calc tempf from pressure sensor
     tempf = myPressure.readTemp();
     
     //Calc pressure
-    pressure = myPressure.readPressure();
+    pressure = myPressure.readPressure()/100;
 
     //Total rainfall for the day is calculated within the interrupt
     //Calculate amount of rainfall for the last 60 minutes
@@ -308,7 +309,7 @@ float get_wind_speed()
 }
 
 //Read the wind direction sensor, return heading in degrees
-char get_wind_direction()
+int get_wind_direction()
 {
     unsigned int adc;
     adc = analogRead(WDIR); // get the current reading from the sensor
@@ -325,7 +326,7 @@ void printWeather()
     Serial.print("\t");
     Serial.print(pressure);
     Serial.print("\t");
-    Serial.print(analogRead(WDIR));
+    Serial.print(winddir);
     Serial.print("\t");
     Serial.print(windspeedmph);
     Serial.print("\t");
