@@ -1,9 +1,9 @@
     <!-- //////////////////// LOGIN FORM /////////////////////////// -->
-    <div class="modal fade" id="co2_1" role="dialog">
+    <div class="modal fade" id="polvo1" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"><i class="fas fa-tint"></i> Dióxido de carbono en la última hora</h4>
+                    <h4 class="modal-title"><i class="fas fa-tint"></i> Polvo en el aire en la última hora</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -13,25 +13,25 @@
                     $reg = mysqli_query($con,$sql);
                     if ($reg->num_rows > 0) {
                         while($row = mysqli_fetch_array($reg)){
-                                $co2 = $row['co2'];
+                                $polvo = $row['polvo'];
                                 $fecha = strtotime($row['fecha2'])*1000;
-                                $co221[] = "[$fecha,$co2]";
+                                $pol1[] = "[$fecha,$polvo]";
                         }
                     }
                             
                 ?>
 
-                    <div id="cont-co2-1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                    <div id="cont-pol-1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                     <script src="code/highcharts.js"></script>
                     <script src="code/modules/exporting.js"></script>
                     <script src="code/modules/export-data.js"></script>
                     <script type="text/javascript">
-                        Highcharts.chart('cont-co2-1', {
+                        Highcharts.chart('cont-pol-1', {
                             chart: {
                                 type: 'area'
                             },
                             title: {
-                                text: 'Dióxido de carbono en la última hora'
+                                text: 'Polvo en el aire en la última hora'
                             },
                             subtitle: {
                                 text: 'MeteorinoPi'
@@ -57,9 +57,9 @@
                                 }
                             },
                             series: [{
-                                data: [<?php echo join($co221, ','); ?>],
-                                name: 'Dióxido de carbono en el aire',
-                                color: '#757575'
+                                data: [<?php echo join($pol1, ','); ?>],
+                                name: 'Partículas de polvo en el aire',
+                                color: '#E65100'
                             }]
                         });
                     </script>     
