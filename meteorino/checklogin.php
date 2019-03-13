@@ -2,17 +2,17 @@
 session_start();
 require("conexion.php");
 
-$usuario = $_POST['usuario'];
+$email = $_POST['email'];
 $clave = $_POST['clave'];
 
-$datos = $con->query("SELECT * FROM login WHERE usuario = '$usuario' ");
+$datos = $con->query("SELECT * FROM login WHERE email = '$email' ");
 
 
 	if($sql = mysqli_fetch_array($datos)){
 		$mi_clave = $sql['clave'];
+		$pass = password_verify($clave,$mi_clave);
 
-		if ($clave == $mi_clave){
-
+		if ($pass > 0){
 			$mi_usuario = $sql['usuario'];
 			$nivel_sql = $sql['nivel'];
 			$_SESSION['mi_usuario'] = $mi_usuario;

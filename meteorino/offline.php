@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <a class="navbar-brand" href="#">MeteorinoPi</a>
+    <a class="navbar-brand" href="index.php">MeteorinoPi</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>

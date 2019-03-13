@@ -19,7 +19,7 @@ if(isset($_SESSION['mi_nivel'])){
 ?>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <a class="navbar-brand" href="#">MeteorinoPi</a>
+    <a class="navbar-brand" href="index.php">MeteorinoPi</a>
     </a>
     <a class="nav-link" style="color:white"><?php echo "Bienvenido/a ".$_SESSION['mi_usuario']."!"; ?></a>
 
@@ -39,7 +39,7 @@ if(isset($_SESSION['mi_nivel'])){
                 <a class="nav-link" href="usuarios_super.php"><i class="fa fa-users"></i> Control de Usuarios</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="logoff.php"><i class="fa fa-sign-out"></i> Cerrar Sesión</a>
+                <a class="nav-link" href="logoff.php"><i class="fa fa-sign-out-alt"></i> Cerrar Sesión</a>
             </li>
         </ul> 
     </div>  

@@ -47,17 +47,22 @@
     }
     </script>
 
+    <script>
+	$(document).ready(function(){
+	    $('[data-toggle="popover"]').popover();   
+	});
+	</script>
+
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtnsXZX14K211LO5ir10jlcSelL581QDw&callback=initMap">
     </script>
     <!--//////////////////////////////////////////-->
-
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%;
-        width: 100%;
+        height: 430px;
+        width: 540px;
       }
 
       /* Optional: Makes the sample page fill the window. */
@@ -69,7 +74,7 @@
 
 </head>
 
-<body style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/rain.jpg'); padding-left: 2%; padding-right: 2%">
+<body style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/sunny.jpg'); background-size: 130%; padding-left: 2%; padding-right: 2%">
 
     <?php include("html/modal_registro.php");?>
     <?php include("html/modal_login.php");?>
@@ -101,13 +106,13 @@
         <!-- HEADER -->
         <div class="row">
             <div class="col-md">
-                <div class="card bg-dark" style="opacity: 0.6; margin-bottom: 20px;">    
+                <div class="card bg-dark" style="margin-bottom: 20px;">    
                     <div class="card-body" >
                         <h3 class="font-weight-light float-left" style="color:white">Clima actual</h3>
                         <h3 class="font-weight-light float-right" style="color:white">
                             <?php
                                 setlocale (LC_TIME,"Spanish_Chile");;
-                                echo strftime("%B %d, %Y  %Rhrs");
+                                echo strftime("%d/%m/%Y  %Rhrs");
                             ?>
                         </h3>
                     </div>
@@ -258,7 +263,7 @@
                                 <div class="col">
                                     <p style="font-size:16px; color:white; text-align:center;">
                                         <?php 
-                                            echo sprintf("%.1f W/m2", $uv);                                     
+                                            echo sprintf("%.1f mW/cm2", $uv);                                     
                                         ?>
                                     </p>
                                 </div>
@@ -266,7 +271,50 @@
                             <div class="row">
                                 <div class="col">
                                     <p style="font-size:16px; color:white; text-align:center;">
-                                        <img src="imgs/uv/verde.png" width="100%" class="float-center">
+                                        <?php 
+
+                                        if ($uv < 2){
+                                        ?>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Bajo" data-content="Puede permanecer en el exterior sin riesgo." class="btn btn-primary btn-sm">Bajo</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Medio" data-content="Se recomienda el uso de lentes, sombrero y bloqueador." class="btn btn-outline-success btn-sm">Medio</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Alto" data-content="Manténgase a la sombra durante el mediodía. Se recomienda el uso de lentes, sombrero y bloqueador." class="btn btn-outline-warning btn-sm">Alto</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Muy Alto" data-content="Evite la exposición al sol o manténgase a la sombra entre las 10am y 4pm. Es imprescindible el uso de lentes, sombrero y bloqueador." class="btn btn-outline-danger btn-sm">Muy Alto</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Extremo" data-content="Evite totalmente la exposición al sol entre las 10am y 4pm. Es imprescindible el uso de lentes, sombrero y bloqueador." class="btn btn-outline-light btn-sm">Extremo</button>
+                                        <?php
+                                        }elseif ($uv > 2 && $uv < 3) {
+                                        ?>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Bajo" data-content="Puede permanecer en el exterior sin riesgo." class="btn btn-outline-primary btn-sm">Bajo</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Medio" data-content="Se recomienda el uso de lentes, sombrero y bloqueador." class="btn btn-success btn-sm">Medio</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Alto" data-content="Manténgase a la sombra durante el mediodía. Se recomienda el uso de lentes, sombrero y bloqueador." class="btn btn-outline-warning btn-sm">Alto</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Muy Alto" data-content="Evite la exposición al sol o manténgase a la sombra entre las 10am y 4pm. Es imprescindible el uso de lentes, sombrero y bloqueador." class="btn btn-outline-danger btn-sm">Muy Alto</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Extremo" data-content="Evite totalmente la exposición al sol entre las 10am y 4pm. Es imprescindible el uso de lentes, sombrero y bloqueador." class="btn btn-outline-light btn-sm">Extremo</button>
+                                        <?php    
+                                        }elseif ($uv > 3 && $uv < 4) {
+                                        ?>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Bajo" data-content="Puede permanecer en el exterior sin riesgo." class="btn btn-outline-primary btn-sm">Bajo</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Medio" data-content="Se recomienda el uso de lentes, sombrero y bloqueador." class="btn btn-outline-success btn-sm">Medio</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Alto" data-content="Manténgase a la sombra durante el mediodía. Se recomienda el uso de lentes, sombrero y bloqueador." class="btn btn-warning btn-sm">Alto</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Muy Alto" data-content="Evite la exposición al sol o manténgase a la sombra entre las 10am y 4pm. Es imprescindible el uso de lentes, sombrero y bloqueador." class="btn btn-outline-danger btn-sm">Muy Alto</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Extremo" data-content="Evite totalmente la exposición al sol entre las 10am y 4pm. Es imprescindible el uso de lentes, sombrero y bloqueador." class="btn btn-outline-light btn-sm">Extremo</button>
+                                        <?php    
+                                        }elseif ($uv > 4 && $uv < 5){
+                                        ?>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Bajo" data-content="Puede permanecer en el exterior sin riesgo." class="btn btn-outline-primary btn-sm">Bajo</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Medio" data-content="Se recomienda el uso de lentes, sombrero y bloqueador." class="btn btn-outline-success btn-sm">Medio</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Alto" data-content="Manténgase a la sombra durante el mediodía. Se recomienda el uso de lentes, sombrero y bloqueador." class="btn btn-outline-warning btn-sm">Alto</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Muy Alto" data-content="Evite la exposición al sol o manténgase a la sombra entre las 10am y 4pm. Es imprescindible el uso de lentes, sombrero y bloqueador." class="btn btn-danger btn-sm">Muy Alto</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Extremo" data-content="Evite totalmente la exposición al sol entre las 10am y 4pm. Es imprescindible el uso de lentes, sombrero y bloqueador." class="btn btn-outline-light btn-sm">Extremo</button>
+                                        <?php
+                                        }elseif ($uv > 5) {
+                                        ?>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Bajo" data-content="Puede permanecer en el exterior sin riesgo." class="btn btn-outline-primary btn-sm">Bajo</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Medio" data-content="Se recomienda el uso de lentes, sombrero y bloqueador." class="btn btn-outline-success btn-sm">Medio</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Alto" data-content="Manténgase a la sombra durante el mediodía. Se recomienda el uso de lentes, sombrero y bloqueador." class="btn btn-outline-warning btn-sm">Alto</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Muy Alto" data-content="Evite la exposición al sol o manténgase a la sombra entre las 10am y 4pm. Es imprescindible el uso de lentes, sombrero y bloqueador." class="btn btn-outline-danger btn-sm">Muy Alto</button>
+                                            <button type="button" data-toggle="popover" data-trigger="focus"  title="Extremo" data-content="Evite totalmente la exposición al sol entre las 10am y 4pm. Es imprescindible el uso de lentes, sombrero y bloqueador." class="btn btn-light btn-sm">Extremo</button>
+                                        <?php
+                                        }
+                                        ?>
                                     </p>
                                 </div>
                             </div>
@@ -324,17 +372,44 @@
             </div>  
 
             <div class="col-md-2">
-                        <div class="card bg-dark">    
-                                <div class="card-body">
-                        <h4 class="card-title font-weight-light" style="font-size:16px;color:white">Consejos</h4>
-                                            <p class="card-text font-weight-light" style="font-size:20px; color:white"><br><br><br></p>
+                <div class="card bg-dark">    
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-light" style="font-size:16px; color:white">T. Líquidos</h4>
+                            <p class="card-text" style="font-size:20px; color:white; text-align:right;">
+                                <?php 
+                                    $consulta = "SELECT * from `weather` ORDER BY `id` DESC LIMIT 1";
+                                    $registro = mysqli_query($con,$consulta);
+                                    while($row = mysqli_fetch_array($registro)){
+                                        $temperatura2 = $row['temperatura2'];
+                                    }
+
+                                        echo sprintf("%.1f °C", $temperatura2);
+                                ?>               
+                            </p>                   
                     </div>  
-                        </div>
+                </div>
+                <br>
+                <div class="card bg-dark">    
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-light" style="font-size:16px; color:white">Altitud</h4>
+                            <p class="card-text" style="font-size:20px; color:white; text-align:right;">
+                                <?php 
+                                    $consulta = "SELECT * from `gps` ORDER BY `id` DESC LIMIT 1";
+                                    $registro = mysqli_query($con,$consulta);
+                                    while($row = mysqli_fetch_array($registro)){
+                                        $altitud = $row['altitud'];
+                                    }
+
+                                        echo sprintf("%.1f m", $altitud);
+                                ?>               
+                            </p>                   
+                    </div>  
+                </div>
                 <br>
                 <div class="card bg-dark">    
                     <div class="card-body">
                         <h4 class="card-title font-weight-light" style="font-size:16px;color:white">Luna</h4>
-                                            <div id="contain_moon" style="font-size:20px; color:white; text-align:center;"><div></div><div></div></div> 
+                            <div id="contain_moon" style="font-size:20px; color:white; text-align:center;"><div></div><div></div></div> 
                             <p class="card-text font-weight-light" style="font-size:20px; color:white"></p>
                     </div>  
                 </div>
@@ -344,7 +419,7 @@
             <div class="col-md-6" style="padding-top:20px;">
                 <div class="card bg" style="height:100%; ">    
                     <div id="map"></div>
-                </div>
+            	</div>
             </div>
           <!-- FIN GPS-->
 

@@ -17,7 +17,7 @@ if(isset($_SESSION['mi_nivel'])){
 ?>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <a class="navbar-brand" href="#">MeteorinoPi</a>
+    <a class="navbar-brand" href="index.php">MeteorinoPi</a>
     </a>
     <a class="nav-link" style="color:white"><?php echo "Bienvenido/a ".$_SESSION['mi_usuario']."!"; ?></a>
 
