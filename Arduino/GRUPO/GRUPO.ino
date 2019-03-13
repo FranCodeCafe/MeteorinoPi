@@ -55,6 +55,9 @@ void loop()
     float outputVoltage = 3.3 / refLevel * uvLevel;
     float intensidad = mapfloat(outputVoltage, 0.99, 2.8, 0.0, 15.0); 
 
+    //float uv1 = intensidad*10; //W/m2 = mW/cm2*10
+    //float uv2 = uv1*1000;  //mW/m2 = W/m2*1000
+    
     int percentage;
     float volts;
     volts = MGRead(MG_PIN);
