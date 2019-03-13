@@ -1,4 +1,4 @@
-    <!-- /////////////////// REGISTRO FORM ///////////////////// -->
+<!-- /////////////////// REGISTRO FORM ///////////////////// -->
 <div class="modal fade" id="registro" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">

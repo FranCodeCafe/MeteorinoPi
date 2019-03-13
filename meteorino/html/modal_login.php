@@ -12,12 +12,12 @@
                     <form method="POST" class="needs-validation" action="checklogin.php" novalidate>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="usuario"> Usuario</label>
-                                <input type="usuario" name="usuario" class="form-control" id="usuario" placeholder="Ingresa tu usuario" required>
+                                <label for="email"> Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Ingresa tu email" required>
                                 <div class="valid-feedback">
                                 </div>
                                 <div class="invalid-feedback">
-                                    Por favor ingresa tu usuario.
+                                    Por favor ingresa tu email.
                                 </div>
                             </div>
                         </div>
@@ -33,6 +33,8 @@
                                 <div class="invalid-feedback">
                                     Por favor ingresa tu clave.
                                 </div>
+                                </br>
+                                <a href="clave_olvidada.php" style="font-size: 13px;"><i class="fa fa-exclamation-circle" style="font-size: 16px;"></i>¿Olvidaste tu clave? Haz click aquí.</a>
                             </div>
                         </div>
                         <div class="modal-footer">
